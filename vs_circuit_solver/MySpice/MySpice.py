@@ -30,7 +30,6 @@ class Init_Data:
 def LoadFile(path):
     parser = MySpiceParser(path=path)
     circuit = parser.build_circuit()
-    #print(path)
     return circuit
 
 
@@ -62,8 +61,8 @@ def CreateCVC(circuit, input_data, lendata, cycle=1):
     Inoise = numpy.random.normal(0, numpy.sqrt(10 ** (avg_Inoise_db / 10)), len(analysis.VCurrent))
     analysis.VCurrent = numpy.array(analysis.VCurrent, dtype=float) + Inoise
     return analysis
-    
-    
+
+
 def CreateCVC1(circuit, input_data, lendata, name="input", cycle=1):
     # lendata не может принимать значения меньше 59
     period = 1 / input_data.F
@@ -72,7 +71,7 @@ def CreateCVC1(circuit, input_data, lendata, name="input", cycle=1):
     circuit.AcLine('Current', circuit.gnd, 'input_dummy', rms_voltage=rms_voltage, frequency=input_data.F)
     simulator = circuit.simulator()
     analysis = simulator.transient(step_time=period / lendata, end_time=period * cycle)
-    analysis.input_dummy=analysis[name]
+    analysis.input_dummy = analysis[name]
     analysis.input_dummy = analysis.input_dummy[len(analysis.input_dummy)-lendata:len(analysis.input_dummy)]
     analysis.input_dummy = analysis.input_dummy[len(analysis.input_dummy)-lendata:len(analysis.input_dummy)]
     analysis.VCurrent = analysis.VCurrent[len(analysis.VCurrent)-lendata:len(analysis.VCurrent)]
