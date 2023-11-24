@@ -1,7 +1,6 @@
 import math
 import csv
 import numpy
-from dataclasses import dataclass
 
 from PySpice.Spice.Parser import SpiceParser
 from PySpice.Spice.Parser import Model
@@ -19,7 +18,7 @@ class MySpiceParser(SpiceParser):
                 statement.build(circuit)
 
 
-@dataclass
+
 class Init_Data:
     F: float
     V: float

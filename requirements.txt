@@ -1,1 +1,4 @@
-# put your requirements here
+numpy
+scipy
+matplotlib
+PySpice
